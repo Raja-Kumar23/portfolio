@@ -1,46 +1,77 @@
 "use client"
 
-export default function Blog() {
-  const articles = [
-    {
-      date: "Oct 15, 2024",
-      title: "Getting Started with React Hooks",
-      excerpt: "A comprehensive guide to understanding and using React Hooks in your projects.",
-    },
-    {
-      date: "Oct 10, 2024",
-      title: "Firebase Authentication Best Practices",
-      excerpt: "Explore security best practices when implementing Firebase authentication.",
-    },
-    {
-      date: "Oct 5, 2024",
-      title: "Building Responsive Web Designs",
-      excerpt: "Master the art of creating responsive designs across all devices.",
-    },
-  ]
+import { useEffect, useState } from "react"
+import Navbar from "@/components/navbar"
+import Hero from "@/components/hero"
+import About from "@/components/about"
+import Skills from "@/components/skills"
+import Projects from "@/components/projects"
+import PortfolioFeedback from "@/components/portfolio-feedback"
+import Contact from "@/components/contact"
+import Footer from "@/components/footer"
+
+export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          background: "linear-gradient(135deg, #050812 0%, #0a0e27 100%)",
+        }}
+      >
+        <div style={{ position: "relative", width: "64px", height: "64px" }}>
+          <div
+            style={{
+              position: "absolute",
+              inset: "0",
+              borderRadius: "50%",
+              border: "4px solid rgba(0, 212, 255, 0.2)",
+              animation: "spin 1s linear infinite",
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              inset: "8px",
+              borderRadius: "50%",
+              border: "4px solid transparent",
+              borderTopColor: "#00d4ff",
+              animation: "spin 1s linear infinite reverse",
+            }}
+          ></div>
+        </div>
+        <style>{`
+          @keyframes spin {
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    )
+  }
 
   return (
-    <section id="blog" className="py-20 bg-gradient-to-br from-bg-card/50 to-accent-purple/5">
-      <div className="container">
-        <h2 className="text-4xl md:text-5xl font-black mb-16 text-center gradient-text">Latest Articles</h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {articles.map((article, idx) => (
-            <article
-              key={idx}
-              className="glass-effect p-8 rounded-xl hover:border-primary transition-all hover:shadow-lg hover:-translate-y-2"
-              style={{ animation: "fadeInUp 0.6s ease-out" }}
-            >
-              <p className="text-primary text-sm font-semibold mb-3">{article.date}</p>
-              <h3 className="text-text-primary text-xl font-bold mb-4">{article.title}</h3>
-              <p className="text-text-secondary mb-6">{article.excerpt}</p>
-              <a href="#" className="text-primary font-semibold hover:text-primary-light transition-colors">
-                Read More →
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <main
+      style={{
+        background: "linear-gradient(135deg, #050812 0%, #0a0e27 50%, #0f1729 100%)",
+      }}
+    >
+      <Navbar />
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <PortfolioFeedback />
+      <Contact />
+      <Footer />
+    </main>
   )
 }

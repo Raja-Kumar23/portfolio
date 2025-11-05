@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import styles from "./navbar.module.css"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,130 +16,85 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-1000 transition-all duration-300 ${
-        isScrolled ? "bg-bg-dark/85 backdrop-blur-md border-b border-primary/15" : "bg-transparent"
-      }`}
-      style={{ animation: "slideDown 0.6s ease-out" }}
-    >
-      <div className="container flex justify-between items-center py-4">
-        <div
-          className="text-2xl font-black bg-gradient-to-r from-primary to-accent-purple bg-clip-text text-transparent"
-          style={{ animation: "glow 3s ease-in-out infinite" }}
-        >
-          RK
-        </div>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+      <div className="container flex-between">
+        <div className={styles.logo}>RK</div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 items-center">
+        <ul className={`${styles.menu} hidden-mobile`}>
           <li>
-            <a href="#home" className="nav-link">
+            <a href="#home" className={styles.navLink}>
               Home
             </a>
           </li>
           <li>
-            <a href="#about" className="nav-link">
+            <a href="#about" className={styles.navLink}>
               About
             </a>
           </li>
           <li>
-            <a href="#skills" className="nav-link">
+            <a href="#skills" className={styles.navLink}>
               Skills
             </a>
           </li>
           <li>
-            <a href="#projects" className="nav-link">
+            <a href="#projects" className={styles.navLink}>
               Projects
             </a>
           </li>
+          <li style={{ width: "1px", height: "24px", background: "rgba(0, 212, 255, 0.2)" }}></li>
           <li>
-            <a href="#achievements" className="nav-link">
-              Achievements
-            </a>
-          </li>
-          <li className="w-px h-6 bg-primary/20"></li>
-          <li>
-            <a href="#contact" className="btn-primary text-sm">
+            <a href="#contact" className="btn-primary" style={{ fontSize: "0.875rem" }}>
               Get In Touch
             </a>
           </li>
         </ul>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden flex flex-col gap-1.5 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-          <span className={`w-6 h-0.5 bg-primary transition-all ${isOpen ? "rotate-45 translate-y-2" : ""}`}></span>
-          <span className={`w-6 h-0.5 bg-primary transition-all ${isOpen ? "opacity-0" : ""}`}></span>
-          <span className={`w-6 h-0.5 bg-primary transition-all ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+        <button className={`${styles.hamburger} hidden-desktop`} onClick={() => setIsOpen(!isOpen)}>
+          <span className={`${styles.line} ${isOpen ? styles.line1 : ""}`}></span>
+          <span className={`${styles.line} ${isOpen ? styles.line2 : ""}`}></span>
+          <span className={`${styles.line} ${isOpen ? styles.line3 : ""}`}></span>
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-bg-dark/95 backdrop-blur-md border-b border-primary/15 p-4">
-          <ul className="flex flex-col gap-4">
+        <div className={styles.mobileMenu}>
+          <ul className={styles.mobileMenuList}>
             <li>
-              <a href="#home" className="nav-link block" onClick={() => setIsOpen(false)}>
+              <a href="#home" className={styles.navLink} onClick={() => setIsOpen(false)}>
                 Home
               </a>
             </li>
             <li>
-              <a href="#about" className="nav-link block" onClick={() => setIsOpen(false)}>
+              <a href="#about" className={styles.navLink} onClick={() => setIsOpen(false)}>
                 About
               </a>
             </li>
             <li>
-              <a href="#skills" className="nav-link block" onClick={() => setIsOpen(false)}>
+              <a href="#skills" className={styles.navLink} onClick={() => setIsOpen(false)}>
                 Skills
               </a>
             </li>
             <li>
-              <a href="#projects" className="nav-link block" onClick={() => setIsOpen(false)}>
+              <a href="#projects" className={styles.navLink} onClick={() => setIsOpen(false)}>
                 Projects
               </a>
             </li>
             <li>
-              <a href="#achievements" className="nav-link block" onClick={() => setIsOpen(false)}>
-                Achievements
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="btn-primary block text-center" onClick={() => setIsOpen(false)}>
+              <a
+                href="#contact"
+                className="btn-primary"
+                style={{ display: "block", textAlign: "center" }}
+                onClick={() => setIsOpen(false)}
+              >
                 Get In Touch
               </a>
             </li>
           </ul>
         </div>
       )}
-
-      <style jsx>{`
-        .nav-link {
-          color: #b0b9c6;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          position: relative;
-          font-weight: 500;
-          font-size: 0.95rem;
-        }
-
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, #00d4ff, #a855f7);
-          transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-          color: #00d4ff;
-        }
-
-        .nav-link:hover::after {
-          width: 100%;
-        }
-      `}</style>
     </nav>
   )
 }

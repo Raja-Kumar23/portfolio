@@ -1,8 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter, Poppins, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 
-const geistSans = Geist({ subsets: ["latin"] })
-const geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+})
+const spaceGrotesk = Space_Grotesk({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+})
 
 export const metadata = {
   title: "Raja Kumar - Web Developer & Tech Enthusiast",
@@ -24,13 +33,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#00d4ff" />
       </head>
-      <body className={`${geistSans.className} ${geistMono.className}`}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

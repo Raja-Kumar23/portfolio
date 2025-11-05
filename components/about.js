@@ -31,56 +31,78 @@ export default function About() {
   }, [])
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-bg-card/50 to-accent-purple/5">
+    <section
+      id="about"
+      style={{
+        background: "linear-gradient(135deg, rgba(15, 23, 42, 0.5) 0%, rgba(168, 85, 247, 0.05) 100%)",
+        padding: "6rem 0",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
       <div className="container">
-        <h2 className="text-4xl md:text-5xl font-black mb-16 text-center gradient-text">About Me</h2>
+        <h2
+          style={{ textAlign: "center", marginBottom: "4rem", fontSize: "3.5rem", fontWeight: "900" }}
+          className="gradient-text"
+        >
+          About Me
+        </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image */}
-          <div className="flex justify-center" style={{ animation: "fadeInUp 0.8s ease-out" }}>
-            <div className="relative">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+            gap: "4rem",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", justifyContent: "center", animation: "fadeInUp 0.8s ease-out" }}>
+            <div style={{ position: "relative" }}>
               <img
                 ref={imageRef}
-                src="/professional-developer.jpg"
+                src="/professional-developer-portrait.png"
                 alt="Raja Kumar"
-                className="w-72 h-72 rounded-2xl border-2 border-primary"
                 style={{
+                  width: "clamp(14rem, 80vw, 18rem)",
+                  height: "clamp(14rem, 80vw, 18rem)",
+                  borderRadius: "1.5rem",
+                  border: "2px solid var(--primary)",
                   boxShadow: "0 0 40px rgba(0, 212, 255, 0.3)",
                   transition: "transform 0.1s ease-out",
+                  objectFit: "cover",
                 }}
               />
             </div>
           </div>
 
-          {/* Text */}
           <div style={{ animation: "fadeInUp 1s ease-out" }}>
-            <p className="text-text-secondary text-lg mb-6 leading-relaxed">
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: "1.125rem",
+                marginBottom: "1.5rem",
+                lineHeight: "1.625",
+              }}
+            >
               I'm a passionate Computer Science and Engineering student at KIIT University, dedicated to building
-              innovative web solutions and exploring cutting-edge technologies. With a strong foundation in full-stack
-              development, I love turning ideas into reality through clean, efficient code.
+              innovative web solutions with modern technologies. With a strong foundation in full-stack development, I
+              love turning complex ideas into elegant, efficient applications.
             </p>
-            <p className="text-text-secondary text-lg mb-8 leading-relaxed">
-              My journey in tech started with curiosity about how things work, and it has evolved into a passion for
-              creating seamless user experiences and robust backend systems. I'm constantly learning and experimenting
-              with new frameworks and tools.
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                fontSize: "1.125rem",
+                marginBottom: "2rem",
+                lineHeight: "1.625",
+              }}
+            >
+              My journey started with curiosity about how technology works, evolving into a passion for creating
+              seamless user experiences combined with robust backend systems. I'm constantly exploring emerging
+              frameworks and best practices in web development.
             </p>
 
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="glass-effect p-4 rounded-lg hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
-                <h3 className="text-primary font-bold mb-2">Education</h3>
-                <p className="text-text-secondary text-sm">B.Tech CSE, KIIT University</p>
-              </div>
-              <div className="glass-effect p-4 rounded-lg hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
-                <h3 className="text-primary font-bold mb-2">Focus</h3>
-                <p className="text-text-secondary text-sm">Full-Stack Development</p>
-              </div>
-              <div className="glass-effect p-4 rounded-lg hover:border-primary transition-all hover:shadow-lg hover:-translate-y-1">
-                <h3 className="text-primary font-bold mb-2">Passion</h3>
-                <p className="text-text-secondary text-sm">User-Centric Solutions</p>
-              </div>
-            </div>
-
-            <a href="#" className="btn-primary">
+            <a href="#" className="btn-primary" style={{ display: "inline-block" }}>
               Download Resume
             </a>
           </div>

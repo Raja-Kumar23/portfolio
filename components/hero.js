@@ -2,68 +2,108 @@
 
 import { useEffect, useRef, useState } from "react"
 import * as THREE from "three"
+import styles from "./hero.module.css"
 
 export default function Hero() {
   const containerRef = useRef(null)
   const [typedText, setTypedText] = useState("")
-  const skills = ["HTML & CSS", "JavaScript", "React", "Firebase", "Node.js", "Web Design"]
+  const skills = ["Web Development", "3D Graphics", "Firebase Backend", "UI/UX Design", "React & Node.js"]
   const [skillIndex, setSkillIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  // 3D Scene Setup
   useEffect(() => {
     if (!containerRef.current) return
 
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight * 0.7), 0.1, 1000)
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 
-    renderer.setSize(window.innerWidth, window.innerHeight * 0.6)
+    renderer.setSize(window.innerWidth, window.innerHeight * 0.7)
     renderer.setClearColor(0x000000, 0)
+    renderer.shadowMap.enabled = true
     containerRef.current.appendChild(renderer.domElement)
 
-    // Create animated particles
+    // Particle system with independent rotation
     const particlesGeometry = new THREE.BufferGeometry()
-    const particlesCnt = 100
+    const particlesCnt = 200
     const posArray = new Float32Array(particlesCnt * 3)
 
     for (let i = 0; i < particlesCnt * 3; i += 3) {
-      posArray[i] = (Math.random() - 0.5) * 2000
-      posArray[i + 1] = (Math.random() - 0.5) * 2000
-      posArray[i + 2] = (Math.random() - 0.5) * 2000
+      posArray[i] = (Math.random() - 0.5) * 2500
+      posArray[i + 1] = (Math.random() - 0.5) * 2500
+      posArray[i + 2] = (Math.random() - 0.5) * 2500
     }
 
     particlesGeometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3))
 
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 7,
+      size: 8,
       color: 0x00d4ff,
       sizeAttenuation: true,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.8,
     })
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial)
     scene.add(particles)
 
-    camera.position.z = 100
+    // Rotating torus - independent animation
+    const torusGeometry = new THREE.TorusGeometry(120, 35, 16, 100)
+    const torusMaterial = new THREE.MeshPhongMaterial({
+      color: 0xa855f7,
+      emissive: 0x6b21a8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15,
+    })
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial)
+    scene.add(torus)
 
-    // Animation loop
+    // Secondary rotating cube for depth
+    const cubeGeometry = new THREE.BoxGeometry(60, 60, 60)
+    const cubeMaterial = new THREE.MeshPhongMaterial({
+      color: 0x00d4ff,
+      emissive: 0x00a8cc,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1,
+    })
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+    scene.add(cube)
+
+    // Lighting setup
+    const light1 = new THREE.PointLight(0x00d4ff, 1.5, 600)
+    light1.position.set(200, 200, 200)
+    scene.add(light1)
+
+    const light2 = new THREE.PointLight(0xa855f7, 1, 500)
+    light2.position.set(-200, -200, 200)
+    scene.add(light2)
+
+    camera.position.z = 120
+
     let animationId
     const animate = () => {
       animationId = requestAnimationFrame(animate)
-      particles.rotation.x += 0.0001
-      particles.rotation.y += 0.0002
+      particles.rotation.x += 0.00008
+      particles.rotation.y += 0.00015
+      torus.rotation.x += 0.001
+      torus.rotation.y += 0.002
+      torus.rotation.z += 0.0008
+      cube.rotation.x += 0.0015
+      cube.rotation.y += 0.0012
+      cube.rotation.z += 0.001
       renderer.render(scene, camera)
     }
     animate()
 
-    // Handle resize
     const handleResize = () => {
-      camera.aspect = window.innerWidth / (window.innerHeight * 0.6)
+      const width = window.innerWidth
+      const height = window.innerHeight * 0.7
+      camera.aspect = width / height
       camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight * 0.6)
+      renderer.setSize(width, height)
     }
 
     window.addEventListener("resize", handleResize)
@@ -71,7 +111,9 @@ export default function Hero() {
     return () => {
       window.removeEventListener("resize", handleResize)
       cancelAnimationFrame(animationId)
-      containerRef.current?.removeChild(renderer.domElement)
+      if (containerRef.current && renderer.domElement.parentNode === containerRef.current) {
+        containerRef.current.removeChild(renderer.domElement)
+      }
     }
   }, [])
 
@@ -84,12 +126,12 @@ export default function Hero() {
       timeout = setTimeout(() => {
         setTypedText(currentSkill.substring(0, charIndex + 1))
         setCharIndex(charIndex + 1)
-      }, 100)
+      }, 80)
     } else if (isDeleting && charIndex > 0) {
       timeout = setTimeout(() => {
         setTypedText(currentSkill.substring(0, charIndex - 1))
         setCharIndex(charIndex - 1)
-      }, 50)
+      }, 40)
     } else if (!isDeleting && charIndex === currentSkill.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2000)
     } else if (isDeleting && charIndex === 0) {
@@ -101,51 +143,32 @@ export default function Hero() {
   }, [charIndex, isDeleting, skillIndex, skills])
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <div ref={containerRef} className="absolute inset-0 z-0"></div>
+    <section id="home" className={styles.hero}>
+      <div ref={containerRef} className={styles.canvas}></div>
 
-      {/* Background gradient */}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"
-        style={{ animation: "bgShift 15s ease-in-out infinite" }}
-      ></div>
+      <div className={styles.bgGradient}></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto" style={{ animation: "fadeInUp 1s ease-out" }}>
-        <h1
-          className="text-6xl md:text-7xl font-black mb-4 gradient-text"
-          style={{ animation: "glow 3s ease-in-out infinite" }}
-        >
-          Raja Kumar
-        </h1>
-        <p className="text-xl md:text-2xl text-text-secondary mb-8" style={{ animation: "fadeInUp 1.2s ease-out" }}>
-          CSE Student | Web Developer | Tech Enthusiast
-        </p>
+      <div className={styles.content}>
+        <h1 className={`gradient-text ${styles.title}`}>Raja Kumar</h1>
+        <p className={styles.subtitle}>Full-Stack Developer | 3D Web Specialist | Creative Technologist</p>
 
-        <div
-          className="text-lg md:text-xl text-text-secondary mb-12 min-h-8"
-          style={{ animation: "fadeInUp 1.4s ease-out" }}
-        >
-          <span>Specializing in </span>
-          <span className="text-primary font-bold">{typedText}</span>
-          <span className="text-primary animate-pulse">|</span>
+        <div className={styles.typingContainer}>
+          <span>Crafting </span>
+          <span className={styles.typedText}>{typedText}</span>
+          <span className={styles.cursor}>|</span>
         </div>
 
-        <div className="flex gap-4 justify-center flex-wrap" style={{ animation: "fadeInUp 1.6s ease-out" }}>
-          <a href="#contact" className="btn-primary">
-            Get In Touch
+        <div className={styles.buttons}>
+          <a href="#projects" className="btn-primary">
+            View Projects
           </a>
-          <a href="#projects" className="btn-secondary">
-            View My Work
+          <a href="/resume.pdf" download className="btn-secondary">
+            Download Resume
           </a>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          style={{ animation: "bounce 2s infinite" }}
-        >
-          <div className="w-2 h-2 bg-primary rounded-full mx-auto" style={{ boxShadow: "0 0 20px #00d4ff" }}></div>
+        <div className={styles.scrollIndicator}>
+          <div className={styles.dot}></div>
         </div>
       </div>
     </section>

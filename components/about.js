@@ -61,7 +61,7 @@ export default function About() {
             <div style={{ position: "relative" }}>
               <img
                 ref={imageRef}
-                src="/professional-developer-portrait.png"
+                src="/raj.png"
                 alt="Raja Kumar"
                 style={{
                   width: "clamp(14rem, 80vw, 18rem)",

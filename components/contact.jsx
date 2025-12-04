@@ -120,7 +120,7 @@ export default function Contact({ showToast }) {
                 type="text"
                 id="name"
                 name="name"
-                placeholder="John Doe"
+                placeholder="Raja Kumar Sah"
                 value={formData.name}
                 onChange={handleChange}
                 className={errors.name ? "error" : ""}
@@ -133,7 +133,7 @@ export default function Contact({ showToast }) {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="john@example.com"
+                placeholder="sahrajakumar885@gmail.com"
                 value={formData.email}
                 onChange={handleChange}
                 className={errors.email ? "error" : ""}

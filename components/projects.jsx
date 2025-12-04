@@ -34,43 +34,24 @@ export default function Projects() {
         "A comprehensive platform for KIIT students featuring resources, community features, and academic tools for enhanced learning experience.",
       tags: ["Next.js", "Firebase", "CSS", "JavaScript"],
       link: "https://kiithub.in",
-      screenshot: "/kiithub-student-platform-dashboard-with-purple-the.jpg",
+      screenshot: "/kiithub.png",
       badge: "Live Project",
     },
-    {
-      title: "Portfolio Website",
-      description:
-        "A modern, responsive portfolio website with smooth animations, dark/light theme, and contact form integration.",
-      tags: ["React", "CSS3", "Animations"],
-      link: "#",
-      screenshot: "/modern-portfolio-website-with-neon-cyan-theme.jpg",
-      badge: "Personal",
-    },
+    
   ]
 
-  const works = [
+const works = [
     {
-      title: "E-commerce Dashboard",
-      description:
-        "Designed and developed a complete admin dashboard for an e-commerce platform with analytics and inventory management.",
-      tags: ["UI/UX", "React", "Charts"],
-      screenshot: "/e-commerce-admin-dashboard-with-sales-analytics.jpg",
+        title: "Online Learning Platform (In development)",
+        description:
+            "A comprehensive online learning platform featuring course management, video streaming, progress tracking, and interactive quizzes for enhanced student engagement.",
+        tags: ["Next.js", "Firebase", "Firestore", "Video Streaming"],
+        link: "https://excellpro-client-work.vercel.app/",
+        screenshot: "/excellmaster.png",
+        badge: "In Development",
+        
     },
-    {
-      title: "Social Media App UI",
-      description:
-        "Created a modern social media application interface with stories, posts feed, and messaging features.",
-      tags: ["Figma", "Mobile", "Design"],
-      screenshot: "/social-media-app-mobile-interface-design.jpg",
-    },
-    {
-      title: "Weather Application",
-      description:
-        "Built a real-time weather application with location-based forecasts and beautiful weather animations.",
-      tags: ["API", "JavaScript", "CSS"],
-      screenshot: "/weather-app-showing-sunny-forecast-with-animations.jpg",
-    },
-  ]
+]
 
   return (
     <section className="projects" id="projects" ref={sectionRef}>

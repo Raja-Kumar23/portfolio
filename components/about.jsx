@@ -36,17 +36,10 @@ export default function About() {
         <div className="about-image reveal-left">
           <div className="about-img-wrapper">
             <div className="about-img-inner">
-              <img src="/professional-developer-portrait.png" alt="Raja Kumar working on laptop" />
+              <img src="/mypp.png" alt="Raja Kumar working on laptop" />
             </div>
           </div>
-          <div className="floating-badge">
-            <div className="badge-number">1+</div>
-            <div className="badge-text">Projects</div>
-          </div>
-          <div className="floating-badge">
-            <div className="badge-number">7+</div>
-            <div className="badge-text">Technologies</div>
-          </div>
+          
         </div>
         <div className="about-content reveal-right">
           <h3>Building Modern Web Experiences</h3>

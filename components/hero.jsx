@@ -119,7 +119,7 @@ export default function Hero() {
               <br />
               &nbsp;&nbsp;],
               <br />
-              &nbsp;&nbsp;loves: <span className="string">&quot;UIs&quot;</span>
+              &nbsp;&nbsp;loves: <span className="string">&quot;Chicken Biryani&quot;</span>
               <br />
               {"}"};
               <br />

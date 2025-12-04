@@ -197,9 +197,9 @@ body {
 
 .navbar.scrolled {
   top: 12px;
-  width: 55%;
-  max-width: 600px;
-  padding: 0.6rem 1.8rem;
+  width:55%;
+height: 60px;     /* ultra small */
+  padding: 0 0.8rem;
   background: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
@@ -310,10 +310,11 @@ body {
 .hero-subtitle {
   color: var(--neon-cyan);
   font-size: 1rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.1rem;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards 0.2s;
+   font-family: "Fira Code", monospace;
 }
 
 .hero-title {
@@ -620,6 +621,15 @@ section {
   transform: translateY(0);
 }
 
+
+
+
+
+
+
+
+
+
 /* About Section */
 .about {
   background: var(--bg-secondary);
@@ -753,6 +763,24 @@ section {
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Projects Section */
 .featured-project {
@@ -1146,6 +1174,18 @@ section {
   color: var(--neon-cyan);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Contact Section */
 .contact {
   position: relative;
@@ -1311,6 +1351,18 @@ section {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 245, 255, 0.25);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Toast */
 .toast {

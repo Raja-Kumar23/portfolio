@@ -130,7 +130,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="scroll-indicator" style={{ opacity: showIndicator ? 1 : 0 }}>
+      {/* <div className="scroll-indicator" style={{ opacity: showIndicator ? 1 : 0 }}>
         <span>Scroll</span>
         <div className="mouse"></div>
         <div className="scroll-arrows">
@@ -141,7 +141,7 @@ export default function Hero() {
             <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }

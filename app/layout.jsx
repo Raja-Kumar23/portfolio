@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Favicon from public folder */}
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/mypp.png" type="image/png" />
 
         {/* Google Font */}
         <link

@@ -628,8 +628,6 @@ section {
 
 
 
-
-
 /* About Section */
 .about {
   background: var(--bg-secondary);
@@ -644,6 +642,7 @@ section {
   margin: 0 auto;
 }
 
+/* Image Wrapper */
 .about-img-wrapper {
   width: 100%;
   max-width: 280px;
@@ -653,18 +652,21 @@ section {
   padding: 3px;
   margin: 0 auto;
   animation: borderGlow 3s ease-in-out infinite;
+  position: relative;
+  overflow: visible;
+  perspective: 1000px;
 }
 
 @keyframes borderGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+  0%,100% {
+    box-shadow: 0 0 20px rgba(0,245,255,0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(191, 0, 255, 0.4);
+    box-shadow: 0 0 40px rgba(191,0,255,0.4);
   }
 }
 
+/* Inner container */
 .about-img-inner {
   width: 100%;
   height: 100%;
@@ -673,21 +675,25 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
+/* Image */
 .about-img-inner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 18px;
-  transition: transform 0.5s;
+  transition: transform 0.7s ease;
+  transform-style: preserve-3d;
 }
 
+/* 3D Pop Out Hover */
 .about-img-wrapper:hover .about-img-inner img {
-  transform: scale(1.05);
+  transform: scale(1.35) translateZ(80px);
 }
 
+/* Floating Badges */
 .floating-badge {
   position: absolute;
   background: var(--glass-bg);
@@ -698,21 +704,24 @@ section {
   animation: floatBadge 3s infinite ease-in-out;
 }
 
+/* top right badge */
 .floating-badge:nth-child(2) {
-  top: 5%;
-  right: 0%;
+  top: 0;
+  right: 0;
+  transform: translate(200%, -200%);
   animation-delay: -1s;
 }
 
+/* bottom left badge */
 .floating-badge:nth-child(3) {
-  bottom: 5%;
-  left: 0%;
+  bottom: 0;
+  left: 0;
+  transform: translate(-200%, 200%);
   animation-delay: -2s;
 }
 
 @keyframes floatBadge {
-  0%,
-  100% {
+  0%,100% {
     transform: translateY(0);
   }
   50% {
@@ -720,6 +729,7 @@ section {
   }
 }
 
+/* Badge Text */
 .badge-number {
   font-size: 1.4rem;
   font-weight: 700;
@@ -734,6 +744,7 @@ section {
   color: var(--text-secondary);
 }
 
+/* Content */
 .about-content h3 {
   font-size: 1.6rem;
   margin-bottom: 1.2rem;
@@ -763,9 +774,6 @@ section {
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
-
-
-
 
 
 
